@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 set -x
 
-# Remove traces of MAC address and UUID from network configuration
-sudo sed -E -i '/^(HWADDR|UUID)/d' /etc/sysconfig/network-scripts/ifcfg-e*
-
 # Add net.ifnames to /etc/default/grub and rebuild grub.cfg
 sudo sed -i -e '/GRUB_CMDLINE_LINUX/ s:"$: net.ifnames=0":' /etc/default/grub
 sudo /sbin/grub2-mkconfig -o /boot/grub2/grub.cfg

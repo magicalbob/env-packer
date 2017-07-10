@@ -19,7 +19,7 @@
       "iso_url":           "{{user `iso_url`}}",
       "iso_checksum":      "{{user `iso_md5`}}",
       "http_directory":    "ks",
-      "ssh_wait_timeout":  "300s",
+      "ssh_wait_timeout":  "3000s",
       "ssh_pty" :          "true",
       "ssh_username":      "{{user `ssh_username`}}",
       "ssh_password":      "{{user `ssh_password`}}",
@@ -36,8 +36,10 @@
     "execute_command": "{{.Vars}} bash '{{.Path}}'",
     "scripts": [
       "scripts/vagrant.sh",
+      "scripts/iptables.sh",
       "scripts/update.sh",
       "scripts/puppet.sh",
+      "scripts/jenkins.sh",
       "scripts/cleanup.sh"
     ]
   }],
