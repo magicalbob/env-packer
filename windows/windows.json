@@ -1,0 +1,53 @@
+{
+    "variables": {
+      "iso_url":  "{{env `ISO_URL`}}",
+      "iso_md5":  "{{env `ISO_MD5`}}"
+    },
+
+    "builders": [{
+    "type": "virtualbox-iso",
+    "headless":          true,
+    "vboxmanage": [
+      [ "modifyvm", "{{.Name}}", "--natpf1", "winrm,tcp,,55985,,5985" ],
+      [ "modifyvm", "{{.Name}}", "--memory", "2048" ],
+      [ "modifyvm", "{{.Name}}", "--cpus", "2" ]
+    ],
+    "guest_os_type": "Windows2012_64",
+    "iso_url":           "{{user `iso_url`}}",
+    "iso_checksum":      "{{user `iso_md5`}}",
+    "iso_checksum_type": "md5",
+    "communicator": "winrm",
+    "winrm_username": "vagrant",
+    "winrm_password": "vagrant",
+    "winrm_timeout": "5h",
+    "guest_additions_mode": "attach",
+    "shutdown_command": "c:/windows/system32/sysprep/sysprep /oobe /unattend:a:/LoginUnattend.xml",
+    "shutdown_timeout": "15m",
+    "floppy_files": [
+      "answer_files/AutoUnattend.xml",
+      "answer_files/LoginUnattend.xml",
+      "scripts/winrm.ps1",
+      "manifests"
+    ]
+  }],
+  "provisioners": [{
+    "type": "powershell",
+    "elevated_user": "{{user `username`}}",
+    "elevated_password": "{{user `password`}}",
+    "scripts": [
+      "./scripts/updates.cmd",
+      "./scripts/guest.cmd",
+      "./scripts/winrm.ps1",
+      "./scripts/puppet-install.cmd",
+      "./scripts/puppet.cmd",
+      "./scripts/cleanup.cmd"
+    ]
+  }],
+    "post-processors": [
+    {
+      "type": "vagrant",
+      "keep_input_artifact": false,
+      "output": "windows2016-{{.Provider}}-{{timestamp}}.box"
+    }
+  ]
+}
