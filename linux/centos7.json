@@ -42,6 +42,10 @@
       "scripts/jenkins.sh",
       "scripts/cleanup.sh"
     ]
+  },
+  {
+    "type": "puppet-masterless",
+    "manifest_file": "../manifests/site.pp"
   }
   ],
 
