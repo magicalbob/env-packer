@@ -42,7 +42,8 @@
       "scripts/jenkins.sh",
       "scripts/cleanup.sh"
     ]
-  }],
+  }
+  ],
 
   "post-processors": [{
       "type": "vagrant",
