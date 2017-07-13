@@ -13,7 +13,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |vagrant_config|
   vagrant_config.vm.define 'pipatwin01' do |srv|
     srv.vm.box = "windows"
   
-    srv.vm.provision "shell", path: "scripts/vbox.sh", privileged: true
+    #srv.vm.provision "shell", path: "scripts/vbox.sh", privileged: true
     srv.vm.network "private_network", ip: "10.21.1.30"
 
     srv.vm.communicator = "winrm"
