@@ -1,2 +1,3 @@
+.vagrant
 *.box
 iso_installation/*.iso
