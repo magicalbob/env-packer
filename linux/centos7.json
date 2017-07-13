@@ -39,7 +39,6 @@
       "scripts/iptables.sh",
       "scripts/update.sh",
       "scripts/puppet.sh",
-      "scripts/jenkins.sh",
       "scripts/cleanup.sh"
     ]
   },
