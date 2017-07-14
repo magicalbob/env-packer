@@ -16,4 +16,11 @@ node default {
     ensure => present,
     source => 'lynis'
   }
+
+  cron { 'lynis audit system':
+    command => '/bin/lynis audit system',
+    user    => 'root',
+    hour    => 2,
+    minute  => 0,
+  }
 }
