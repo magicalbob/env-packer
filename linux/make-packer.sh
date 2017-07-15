@@ -2,11 +2,16 @@
 
 set -e
 
-export ISO_URL=../iso_installation/CentOS-7-x86_64-Minimal-1611.iso
-export ISO_MD5=d2ec6cfa7cf6d89e484aa2d9f830517c
-export SSH_USERNAME=root
-export SSH_PASSWORD=packer
+PACKER_TEMPLATE=centos7.json
 
-packer build centos7.json
+packer build ${PACKER_TEMPLATE}
 
-vagrant box add -f centos7_pipat packer_virtualbox-iso_virtualbox.box
+if [[ ${ARTIFACTORY_USERNAME} ]]
+then
+  CHECKSUM=$(md5sum packer_virtualbox-iso_virtualbox.box | awk '{ print $1 }')
+
+  curl --header "X-Checksum-MD5:${CHECKSUM}" \
+       -${ARTIFACTORY_USERNAME}:${ARTIFACTORY_PASSWORD} \
+       -T packer_virtualbox-iso_virtualbox.box \
+       "https://dev.ellisbs.co.uk/artifactory/artifactory/vagrant-local/centos7_pipat;box_name=centos7_pipat;box_provider=virtualbox;box_version=${VERSION}"
+fi

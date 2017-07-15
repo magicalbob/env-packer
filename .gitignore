@@ -1,3 +1,4 @@
 .vagrant
 *.box
+*.log
 iso_installation/*.iso

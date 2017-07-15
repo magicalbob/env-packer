@@ -13,7 +13,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |vagrant_config|
   vagrant_config.vm.define 'pipatwin01' do |srv|
     srv.vm.box = "windows"
   
-    #srv.vm.provision "shell", path: "scripts/vbox.sh", privileged: true
     srv.vm.network "private_network", ip: "10.21.1.30"
 
     srv.vm.communicator = "winrm"
@@ -24,16 +23,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |vagrant_config|
   
     srv.vm.provider "virtualbox" do |vb|
       vb.memory = "2048"
-#      vb.customize ['createhd', '--filename', './extra_disk.vdi', '--size', 500 * 1024]
-#      vb.customize ['storageattach', :id, '--storagectl', 'IDE Controller', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', './extra_disk.vdi']
     end
 
   end
 
   vagrant_config.vm.define 'pipat-mobile-jenkins' do |srv|
-    srv.vm.box = "centos7_pipat"
+    srv.vm.box = "https://dev.ellisbs.co.uk/artifactory/vagrant-local/centos7_pipat"
   
-#    srv.vm.provision "shell", path: "scripts/vbox.sh", privileged: true
     srv.vm.network "private_network", ip: "10.21.1.25"
   
     srv.vm.provider "virtualbox" do |vb|
