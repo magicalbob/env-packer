@@ -1,7 +1,5 @@
 node default {
-  class { 'ntp':
-    servers => ['0.uk.pool.ntp.org','1.uk.pool.ntp.org','2.uk.pool.ntp.org','3.uk.pool.ntp.org']
-  }
+  include ntp
 
   yumrepo { 'lynis':
     baseurl => 'https://packages.cisofy.com/community/lynis/rpm/

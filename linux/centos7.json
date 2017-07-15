@@ -31,7 +31,8 @@
     }
   ],
 
-  "provisioners": [{
+  "provisioners": [
+  {
     "type": "shell",
     "execute_command": "{{.Vars}} bash '{{.Path}}'",
     "scripts": [
@@ -47,8 +48,14 @@
     "manifest_file": "../manifests/linux_modules.pp"
   },
   {
+    "type": "file",
+    "source": "../hieradata",
+    "destination": "/tmp/hieradata"
+  },
+  {
     "type": "puppet-masterless",
     "manifest_file": "../manifests/linux_manifest.pp",
+    "hiera_config_path": "./hieradata.conf",
     "execute_command": "cd {{.WorkingDir}} && {{.FacterVars}}{{if .Sudo}} sudo -E {{end}} {{if ne .PuppetBinDir \"\"}}{{.PuppetBinDir}}{{end}}puppet apply --verbose --modulepath='/etc/puppetlabs/code/environments/production/modules:/etc/puppetlabs/code/modules:/opt/puppetlabs/puppet/modules' {{if ne .HieraConfigPath \"\"}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ManifestDir \"\"}}--manifestdir='{{.ManifestDir}}' {{end}} --detailed-exitcodes {{if ne .ExtraArguments \"\"}}{{.ExtraArguments}} {{end}} {{.ManifestFile}}"
   }
   ],
