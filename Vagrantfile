@@ -6,34 +6,40 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 
+# Require YAML module
+require 'yaml'
+
+common=nil
+
+# Read YAML hieradata/common.yaml file to get hosts list
+begin
+  common = YAML.load_file('hieradata/common.yaml')
+rescue
+  print "Cannot open hieradata/common.yaml\n"
+  exit 2
+end       
+
 Vagrant.require_version ">= 1.6.0"
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |vagrant_config|
-  vagrant_config.vm.define 'pipatwin01' do |srv|
-    srv.vm.box = "windows"
+  common['hosts'].each do |host|
+    vagrant_config.vm.define "#{host[0]}" do |srv|
+      srv.vm.box = "#{host[1]['box']}"
   
-    srv.vm.network "private_network", ip: "10.21.1.30"
+      srv.vm.network "private_network", ip: "#{host[1]['ip']}"
 
-    srv.vm.communicator = "winrm"
-    srv.winrm.username = "vagrant"
-    srv.winrm.password = "vagrant"
-    srv.winrm.basic_auth_only = true
-    srv.winrm.transport = "plaintext"
-  
-    srv.vm.provider "virtualbox" do |vb|
-      vb.memory = "2048"
-    end
+      if host[1]['os'] == "windows"
+        srv.vm.communicator = "winrm"
+        srv.winrm.username = "vagrant"
+        srv.winrm.password = "vagrant"
+        srv.winrm.basic_auth_only = true
+        srv.winrm.transport = "plaintext"
+      end
 
-  end
-
-  vagrant_config.vm.define 'pipat-mobile-jenkins' do |srv|
-    srv.vm.box = "https://dev.ellisbs.co.uk/artifactory/vagrant-local/centos7_pipat"
-  
-    srv.vm.network "private_network", ip: "10.21.1.25"
-  
-    srv.vm.provider "virtualbox" do |vb|
-      vb.memory = "2048"
+      srv.vm.provider "virtualbox" do |vb|
+        vb.memory = "2048"
+      end
     end
   end
 end
