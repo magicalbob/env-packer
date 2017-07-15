@@ -23,13 +23,13 @@ Vagrant.require_version ">= 1.6.0"
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |vagrant_config|
-  common['hosts'].each do |host|
-    vagrant_config.vm.define "#{host[0]}" do |srv|
-      srv.vm.box = "#{host[1]['box']}"
+  common['boxes'].each do |box|
+    vagrant_config.vm.define "#{box[0]}" do |srv|
+      srv.vm.box = "#box[1]['box']}"
   
-      srv.vm.network "private_network", ip: "#{host[1]['ip']}"
+      srv.vm.network "private_network", ip: "#{box[1]['ip']}"
 
-      if host[1]['os'] == "windows"
+      if box[1]['os'] == "windows"
         srv.vm.communicator = "winrm"
         srv.winrm.username = "vagrant"
         srv.winrm.password = "vagrant"

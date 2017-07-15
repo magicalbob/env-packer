@@ -8,9 +8,13 @@ ntp::servers:
 hosts:
   'pipat-mobile-jenkins':
      ip:  '10.0.0.10'
+  'pipatwin01':
+     ip:  '10.0.0.11'
+
+boxes:
+  'pipat-mobile-jenkins':
      box: 'https://dev.ellisbs.co.uk/artifactory/vagrant-local/centos7_pipat'
      os:  'linux'
   'pipatwin01':
-     ip:  '10.0.0.11'
      box: 'windows'
      os:  'windows'
