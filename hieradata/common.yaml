@@ -4,3 +4,9 @@ ntp::servers:
   - 1.uk.pool.ntp.org
   - 2.uk.pool.ntp.org
   - 3.uk.pool.ntp.org
+
+hosts:
+  'pipat-mobile-jenkins':
+     ip: '10.0.0.10'
+  'pipatwin01':
+     ip: '10.0.0.11'
