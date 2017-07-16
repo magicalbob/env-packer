@@ -68,7 +68,7 @@
 
   "post-processors": [{
       "type": "vagrant",
-      "keep_input_artifact": false
+      "keep_input_artifact": false,
       "output": "centos7-{{.Provider}}.box"
   }]
 
