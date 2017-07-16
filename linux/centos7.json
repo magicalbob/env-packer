@@ -63,7 +63,7 @@
       "scripts": [
         "scripts/cleanup.sh"
       ]
-    },
+    }
   ],
 
   "post-processors": [{
