@@ -1,5 +1,6 @@
 {
   "variables": {
+    "vm_name": "centos-7-virtualbox-{{timestamp}}",
     "iso_url":  "{{env `ISO_URL`}}",
     "iso_md5":  "{{env `ISO_MD5`}}",
     "winrm_username": "{{env `WINRM_USERNAME`}}",
@@ -9,6 +10,7 @@
   "builders": [{
     "type":    "virtualbox-iso",
     "headless":          true,
+    "vm_name":           "{{user `vm_name`}}",
     "vboxmanage": [
       [ "modifyvm", "{{.Name}}", "--natpf1", "winrm,tcp,,55985,,5985" ],
       [ "modifyvm", "{{.Name}}", "--memory", "2048" ],
@@ -49,7 +51,7 @@
     {
       "type": "vagrant",
       "keep_input_artifact": false,
-      "output": "windows2016-{{.Provider}}-{{timestamp}}.box"
+      "output": "windows2016-{{.Provider}}.box"
     }
   ]
 }
