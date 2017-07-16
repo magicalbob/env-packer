@@ -51,6 +51,7 @@
     {
       "type": "vagrant",
       "keep_input_artifact": false,
+      "compression_level": 9,
       "output": "windows2016-{{.Provider}}.box"
     }
   ]
