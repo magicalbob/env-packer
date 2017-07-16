@@ -5,18 +5,6 @@ node default {
     provider => chocolatey
   }
 
-  package { 'jenkins':
-    ensure   => installed,
-    provider => chocolatey,
-    require  => Package['javaruntime']
-  }
-
-  exec { 'visualstudio registry admin':
-    command => 'cmd.exe /c sc config "Jenkins" obj="%COMPUTERNAME%\Administrator" password="vagrant"',
-    path    => $::path,
-    require => Package['jenkins']
-  }
-
   package { 'visualstudio2015community':
     ensure   => installed,
     provider => chocolatey
