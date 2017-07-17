@@ -1,7 +1,15 @@
 node default {
 
+  $custom_hosts = hiera('hosts',{})
+  create_resources(host, $custom_hosts)
+
+  package { 'git':
+    ensure   => installed,
+    provider => chocolatey
+  }
+
   package { 'javaruntime':
-    ensure   => '7.0.75',
+    ensure   => installed,
     provider => chocolatey
   }
 
