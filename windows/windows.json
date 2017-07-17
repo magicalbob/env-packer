@@ -31,6 +31,7 @@
       "answer_files/AutoUnattend.xml",
       "answer_files/LoginUnattend.xml",
       "scripts/winrm.ps1",
+      "scripts/cleanup.sh",
       "../manifests"
     ]
   }],

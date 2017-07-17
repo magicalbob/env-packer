@@ -59,5 +59,4 @@ DISM /Online /remove-capability /capabilityName:Language.OCR~~~en-US~0.0.1.0
 DISM /Online /remove-capability /capabilityName:Language.Speech~~~en-US~0.0.1.0
 DISM /Online /remove-capability /capabilityName:Language.TextToSpeech~~~en-US~0.0.1.0
 cleanmgr /dc: /verylowdisk
-"c:\Program Files\Git\bin\bash" -c "dd if=/dev/zero of=/tmp/EMPTY.txt"
-"c:\Program Files\Git\bin\bash" -c "rm -f /tmp/EMPTY.txt"
+c:\Progra~1\Git\bin\bash a:\cleanup.sh
