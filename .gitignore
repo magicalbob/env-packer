@@ -2,3 +2,4 @@
 *.box
 *.log
 iso_installation/*.iso
+output-virtualbox-iso
