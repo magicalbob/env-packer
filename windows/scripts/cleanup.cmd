@@ -60,3 +60,4 @@ DISM /Online /remove-capability /capabilityName:Language.Speech~~~en-US~0.0.1.0
 DISM /Online /remove-capability /capabilityName:Language.TextToSpeech~~~en-US~0.0.1.0
 cleanmgr /dc: /verylowdisk
 c:\Progra~1\Git\bin\bash a:\cleanup.sh
+exit
