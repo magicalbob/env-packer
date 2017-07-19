@@ -1,8 +1,6 @@
 node default {
   include ntp
-
-  $custom_hosts = hiera('hosts',{})
-  create_resources(host, $custom_hosts)
+  include hosts
 
   yumrepo { 'lynis':
     baseurl => 'https://packages.cisofy.com/community/lynis/rpm/

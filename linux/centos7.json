@@ -52,6 +52,11 @@
       "destination": "/tmp/hieradata"
     },
     {
+      "type": "file",
+      "source": "../modules",
+      "destination": "/etc/puppetlabs/code/environments/production"
+    },
+    {
       "type": "puppet-masterless",
       "manifest_file": "../manifests/linux_manifest.pp",
       "hiera_config_path": "./hieradata.conf",
