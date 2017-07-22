@@ -11,6 +11,7 @@
     "type":    "virtualbox-iso",
     "headless":          true,
     "vm_name":           "{{user `vm_name`}}",
+    "disk_size":         "30720",
     "vboxmanage": [
       [ "modifyvm", "{{.Name}}", "--natpf1", "winrm,tcp,,55985,,5985" ],
       [ "modifyvm", "{{.Name}}", "--memory", "2048" ],
@@ -31,23 +32,36 @@
       "answer_files/AutoUnattend.xml",
       "answer_files/LoginUnattend.xml",
       "scripts/winrm.ps1",
-      "scripts/cleanup.sh",
       "../manifests"
     ]
   }],
-  "provisioners": [{
-    "type": "powershell",
-    "elevated_user": "{{user `username`}}",
-    "elevated_password": "{{user `password`}}",
-    "scripts": [
-      "./scripts/updates.cmd",
-      "./scripts/guest.cmd",
-      "./scripts/winrm.ps1",
-      "./scripts/puppet-install.cmd",
-      "./scripts/puppet.cmd",
-      "./scripts/cleanup.cmd"
-    ]
-  }],
+  "provisioners": [
+    {
+      "type": "powershell",
+      "elevated_user": "{{user `username`}}",
+      "elevated_password": "{{user `password`}}",
+      "scripts": [
+        "./scripts/updates.cmd",
+        "./scripts/guest.cmd",
+        "./scripts/winrm.ps1",
+        "./scripts/puppet-install.cmd",
+        "./scripts/puppet.cmd",
+        "./scripts/pagefile.cmd"
+      ]
+    },
+    {
+      "type": "windows-restart",
+      "restart_timeout": "15m"
+    },
+    {
+      "type": "powershell",
+      "elevated_user": "{{user `username`}}",
+      "elevated_password": "{{user `password`}}",
+      "scripts": [
+        "./scripts/cleanup.cmd"
+      ]
+    }
+  ],
     "post-processors": [
     {
       "type": "vagrant",

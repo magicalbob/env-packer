@@ -1,63 +1,62 @@
-dism /online /Cleanup-Image /StartComponentCleanup /ResetBase
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~ar-SA~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~bg-BG~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~bn-BD~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~bn-IN~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~ca-ES~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~cs-CZ~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~da-DK~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~de-DE~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~el-GR~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~en-GB~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~es-ES~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~es-MX~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~et-EE~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~eu-ES~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~fi-FI~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~fr-FR~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~gl-ES~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~gu-IN~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~he-IL~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~hi-IN~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~hr-HR~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~hu-HU~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~id-ID~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~is-IS~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~it-IT~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~ja-JP~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~kn-IN~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~ko-KR~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~lt-LT~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~lv-LV~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~ml-IN~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~mr-IN~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~ms-MY~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~nb-NO~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~nl-NL~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~nn-NO~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~pa-IN~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~pl-PL~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~pt-BR~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~pt-PT~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~ro-RO~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~ru-RU~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~sk-SK~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~sl-SI~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~sr-LATN-RS~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~sv-SE~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~ta-IN~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~te-IN~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~th-TH~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~tr-TR~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~ur-PK~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~vi-VN~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~zh-CN~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~zh-HK~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Basic~~~zh-TW~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Handwriting~~~en-US~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.OCR~~~en-US~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.Speech~~~en-US~0.0.1.0
-DISM /Online /remove-capability /capabilityName:Language.TextToSpeech~~~en-US~0.0.1.0
-cleanmgr /dc: /verylowdisk
-c:\Progra~1\Git\bin\bash a:\cleanup.sh
-exit
+DISM /online /Cleanup-Image /StartComponentCleanup /ResetBase
+
+Write-Host "Removing unused features..."
+Remove-WindowsFeature -Name 'Powershell-ISE'
+Get-WindowsFeature |
+? { $_.InstallState -eq 'Available' } |
+Uninstall-WindowsFeature -Remove
+
+@(
+    "$env:localappdata\Nuget",
+    "$env:localappdata\temp\*",
+    "$env:windir\logs",
+    "$env:windir\panther",
+    "$env:windir\temp\*",
+    "$env:windir\winsxs\manifestcache"
+) | % {
+        if(Test-Path $_) {
+            Write-Host "Removing $_"
+            Takeown /d Y /R /f $_
+            Icacls $_ /GRANT:r administrators:F /T /c /q  2>&1 | Out-Null
+            Remove-Item $_ -Recurse -Force -ErrorAction SilentlyContinue | Out-Null
+        }
+    }
+
+Write-Host "Cleaning Temp Files"
+try {
+  Takeown /d Y /R /f "C:\Windows\Temp\*"
+  Icacls "C:\Windows\Temp\*" /GRANT:r administrators:F /T /c /q  2>&1
+  Remove-Item "C:\Windows\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
+} catch { }
+
+Write-Host "Recreate pagefile on start"
+$System = GWMI Win32_ComputerSystem -EnableAllPrivileges
+$System.AutomaticManagedPagefile = $true
+$System.Put()
+
+Write-Host "defragging..."
+Optimize-Volume -DriveLetter C
+
+Write-Host "Wiping empty space on disk..."
+$FilePath="c:\zero.tmp"
+$Volume = Get-WmiObject win32_logicaldisk -filter "DeviceID='C:'"
+$ArraySize= 64kb
+$SpaceToLeave= $Volume.Size * 0.05
+$FileSize= $Volume.FreeSpace - $SpacetoLeave
+$ZeroArray= new-object byte[]($ArraySize)
+ 
+$Stream= [io.File]::OpenWrite($FilePath)
+try {
+   $CurFileSize = 0
+    while($CurFileSize -lt $FileSize) {
+        $Stream.Write($ZeroArray,0, $ZeroArray.Length)
+        $CurFileSize +=$ZeroArray.Length
+    }
+}
+finally {
+    if($Stream) {
+        $Stream.Close()
+    }
+}
+ 
+Remove-Item $FilePath
