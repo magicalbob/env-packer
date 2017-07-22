@@ -1,0 +1,7 @@
+vol_home:          1024
+vol_tmp:           2048
+vol_var:           4096
+vol_var_log:       4096
+vol_var_log_audit: 2048
+vol_root:          4096
+vol_opt:           512

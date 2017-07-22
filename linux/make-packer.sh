@@ -2,9 +2,22 @@
 
 set -e
 
-PACKER_TEMPLATE=centos7.json
+case ${MACHINE_SIZE,,} in
+  micro)
+    export DISK_SIZE="10240"
+    ;; 
+  normal)
+    export DISK_SIZE="51200"
+    ;;
+  *)
+    echo "Need to know MACHINE_SIZE"
+    exit -1
+    ;;
+esac
 
-packer build ${PACKER_TEMPLATE}
+mustache ks/machine_${MACHINE_SIZE}.yml ks/ks.cfg.template > ks/ks.cfg
+
+packer build packer-template.json
 
 if [[ ${ARTIFACTORY_USERNAME} ]]
 then
