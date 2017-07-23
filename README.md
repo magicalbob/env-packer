@@ -3,6 +3,22 @@ env-packer
 
 Build an environment from (nearly) nothing.
 
+Needs
+=====
+
+To be able to reproducibly create defined versions of a whole system from a simple script with minimal input.
+
+Benefits
+========
+
+Allows new devs to get working with the systems without having to first learn how to set up development environments on their own kit.
+
+Allows devs to test software & infrastructure changes on their own kit before sharing them back to the project.
+
+Enables automated testing of software & infrastructure changes.
+
+Provides (& proves) "disaster recovery".
+
 Things
 ======
 
