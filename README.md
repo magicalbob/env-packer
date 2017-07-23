@@ -19,6 +19,8 @@ Enables automated testing of software & infrastructure changes.
 
 Provides (& proves) "disaster recovery".
 
+Patching. Deliverables are fully patched boxes. Regular delivery of boxes means regularly patched system.
+
 Things
 ======
 
