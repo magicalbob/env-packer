@@ -13,8 +13,8 @@ hosts:
 
 boxes:
   'pipat-mobile-jenkins':
-     box: 'https://dev.ellisbs.co.uk/artifactory/vagrant-local/centos7_pipat'
+     box: 'https://dev.ellisbs.co.uk/artifactory/vagrant-local/centos7-normal.box'
      os:  'linux'
   'pipatwin01':
-     box: 'windows'
+     box: 'https://dev.ellisbs.co.uk/artifactory/vagrant-local/windows.box'
      os:  'windows'
