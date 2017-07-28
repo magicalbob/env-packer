@@ -1,0 +1,83 @@
+{
+  "variables": {
+    "os_type":      "{{env `OS_TYPE`}}",
+    "iso_url":      "{{env `ISO_URL`}}",
+    "iso_md5":      "{{env `ISO_MD5`}}",
+    "ssh_username": "{{env `SSH_USERNAME`}}",
+    "ssh_password": "{{env `SSH_PASSWORD`}}",
+    "machine_size": "{{env `MACHINE_SIZE`}}",
+    "disk_size":    "{{env `DISK_SIZE`}}"
+  },
+
+  "builders":
+  [
+    {
+      "headless":          false,
+      "type":              "vmware-iso",
+      "vm_name":           "{{user `os_type`}}",
+      "guest_os_type":     "linux",
+      "vmdk_name":         "centos7",
+      "disk_size":         "{{user `disk_size`}}",
+      "iso_checksum_type": "md5",
+      "iso_url":           "{{user `iso_url`}}",
+      "iso_checksum":      "{{user `iso_md5`}}",
+      "tools_upload_flavor": "linux",
+      "tools_upload_path": "/tmp/vmware_tools_{{.Flavor}}.iso",
+      "http_directory":    "ks",
+      "ssh_wait_timeout":  "3000s",
+      "ssh_pty" :          "true",
+      "ssh_username":      "{{user `ssh_username`}}",
+      "ssh_password":      "{{user `ssh_password`}}",
+      "shutdown_command":  "shutdown -P now",
+      "boot_wait":         "5s",
+      "boot_command": [
+        "<tab> vmlinuz initrd=initrd.img inst.geoloc=0 rd.driver.blacklist=dm-multipath net.ifnames=0 biosdevname=0 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg <enter>"
+      ],
+      "vmx_data": {
+        "cpuid.coresPerSocket": "1",
+        "memsize": "2048",
+        "numvcpus": "2"
+      }
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "{{.Vars}} bash '{{.Path}}'",
+      "scripts": [
+        "scripts/vmware.sh",
+        "scripts/iptables.sh",
+        "scripts/update.sh",
+        "scripts/puppet.sh"
+      ]
+    },
+    {
+      "type": "puppet-masterless",
+      "manifest_file": "../manifests/linux_modules.pp"
+    },
+    {
+      "type": "file",
+      "source": "../hieradata",
+      "destination": "/tmp/hieradata"
+    },
+    {
+      "type": "file",
+      "source": "../modules",
+      "destination": "/etc/puppetlabs/code/environments/production"
+    },
+    {
+      "type": "puppet-masterless",
+      "manifest_file": "../manifests/linux_manifest.pp",
+      "hiera_config_path": "./hieradata.conf",
+      "execute_command": "cd {{.WorkingDir}} && {{.FacterVars}}{{if .Sudo}} sudo -E {{end}} /opt/puppetlabs/bin/puppet apply --verbose --modulepath='/etc/puppetlabs/code/environments/production/modules:/etc/puppetlabs/code/modules:/opt/puppetlabs/puppet/modules' {{if ne .HieraConfigPath \"\"}}--hiera_config='{{.HieraConfigPath}}' {{end}} {{if ne .ManifestDir \"\"}}--manifestdir='{{.ManifestDir}}' {{end}} --detailed-exitcodes {{if ne .ExtraArguments \"\"}}{{.ExtraArguments}} {{end}} {{.ManifestFile}}"
+    },
+    {
+      "type": "shell",
+      "execute_command": "{{.Vars}} bash '{{.Path}}'",
+      "scripts": [
+        "scripts/cleanup.sh"
+      ]
+    }
+  ]
+}
