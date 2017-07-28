@@ -12,7 +12,7 @@
   "builders":
   [
     {
-      "headless":          false,
+      "headless":          true,
       "type":              "vmware-iso",
       "vm_name":           "{{user `os_type`}}",
       "guest_os_type":     "linux",
