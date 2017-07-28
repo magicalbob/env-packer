@@ -56,3 +56,14 @@ Terraform Configuration:
 	As per the Vagrantfile, the Terraform Configuration should use the
 	Hieradata to determine boxes to stand up.
 
+Building Images
+===============
+
+Mac OS X only has version 3 of bash. Substitution of lower case variables only became available in bash version 4::
+
+	brew install bash
+	sudo mv /bin/bash /bin/bash.save
+	sudo mv /bin/sh   /bin/sh.save
+	sudo ln -s /usr/local/Cellar/bash/4.3.46/bin/bash /bin/bash
+	sudo ln -s /bin/bash /bin/sh
+

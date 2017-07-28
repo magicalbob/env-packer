@@ -12,14 +12,17 @@
   "builders":
   [
     {
-      "headless":          true,
-      "type":              "virtualbox-iso",
-      "vm_name":           "{{user `os_type`}}-{{.Provider}}-{{timestamp}}",
-      "guest_os_type":     "RedHat_64",
+      "headless":          false,
+      "type":              "vmware-iso",
+      "vm_name":           "{{user `os_type`}}",
+      "guest_os_type":     "linux",
+      "vmdk_name":         "centos7",
       "disk_size":         "{{user `disk_size`}}",
       "iso_checksum_type": "md5",
       "iso_url":           "{{user `iso_url`}}",
       "iso_checksum":      "{{user `iso_md5`}}",
+      "tools_upload_flavor": "linux",
+      "tools_upload_path": "/tmp/vmware_tools_{{.Flavor}}.iso",
       "http_directory":    "ks",
       "ssh_wait_timeout":  "3000s",
       "ssh_pty" :          "true",
@@ -29,7 +32,12 @@
       "boot_wait":         "5s",
       "boot_command": [
         "<tab> vmlinuz initrd=initrd.img inst.geoloc=0 rd.driver.blacklist=dm-multipath net.ifnames=0 biosdevname=0 ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg <enter>"
-      ]
+      ],
+      "vmx_data": {
+        "cpuid.coresPerSocket": "1",
+        "memsize": "2048",
+        "numvcpus": "2"
+      }
     }
   ],
 
@@ -38,7 +46,7 @@
       "type": "shell",
       "execute_command": "{{.Vars}} bash '{{.Path}}'",
       "scripts": [
-        "scripts/vagrant.sh",
+        "scripts/vmware.sh",
         "scripts/iptables.sh",
         "scripts/update.sh",
         "scripts/puppet.sh"
@@ -71,12 +79,5 @@
         "scripts/cleanup.sh"
       ]
     }
-  ],
-
-  "post-processors": [{
-      "type": "vagrant",
-      "keep_input_artifact": false,
-      "output": "{{user `os_type`}}-{{user `machine_size`}}-{{.Provider}}.box"
-  }]
-
+  ]
 }
