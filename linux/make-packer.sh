@@ -15,7 +15,11 @@ case ${MACHINE_SIZE,,} in
     ;;
 esac
 
+# make the kickstart file based on machine size
 mustache ks/machine_${MACHINE_SIZE}.yml ks/ks.cfg.template > ks/ks.cfg
+
+# make the packer json file based on hypervisor
+mustache cloud-${CLOUD_TYPE}.yml packer-template.json.template > packer-template.json
 
 packer build packer-template.json
 
