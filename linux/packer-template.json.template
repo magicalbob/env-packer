@@ -1,0 +1,91 @@
+{
+  "variables": {
+    "os_type":      "{{ os_type }}",
+    "iso_url":      "{{ iso_url }}",
+    "iso_md5":      "{{ iso_md5 }}",
+    "ssh_username": "{{ ssh_username }}",
+    "ssh_password": "{{ ssh_password }}",
+    "machine_size": "{{ machine_size }}",
+    "disk_size":    "{{ disk_size }}"
+  },
+
+  "builders":
+  [
+    {
+      "headless":          true,
+      "type":              "{{ type }}",
+      "vm_name":           "{{ vm_name }}",
+      "guest_os_type":     "{{ guest_os_type }}",
+{{#vmdk_name}}
+  {{&line}}
+{{/vmdk_name}}
+      "disk_size":         "{{ disk_size_var }}",
+      "iso_checksum_type": "md5",
+      "iso_url":           "{{ iso_url_var }}",
+      "iso_checksum":      "{{ iso_checksum_var}}",
+{{#tools_upload_flavor}}
+  {{&line}}
+{{/tools_upload_flavor}}
+{{#tools_upload_path}}
+  {{&line}}
+{{/tools_upload_path}}
+      "http_directory":    "ks",
+      "ssh_wait_timeout":  "3000s",
+      "ssh_pty" :          "true",
+      "ssh_username":      "{{ ssh_username_var }}",
+      "ssh_password":      "{{ ssh_password_var }}",
+      "shutdown_command":  "shutdown -P now",
+      "boot_wait":         "5s",
+      "boot_command": [
+        "<tab> vmlinuz initrd=initrd.img inst.geoloc=0 rd.driver.blacklist=dm-multipath net.ifnames=0 biosdevname=0 ks=http://{{ HTTP }}/ks.cfg <enter>"
+      ]
+{{#vmx_data}}
+  {{&line}}
+{{/vmx_data}}
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "{{&shell_command}}",
+      "scripts": [
+        "scripts/{{ cloud_script }}",
+        "scripts/iptables.sh",
+        "scripts/update.sh",
+        "scripts/puppet.sh"
+      ]
+    },
+    {
+      "type": "puppet-masterless",
+      "manifest_file": "../manifests/linux_modules.pp"
+    },
+    {
+      "type": "file",
+      "source": "../hieradata",
+      "destination": "/tmp/hieradata"
+    },
+    {
+      "type": "file",
+      "source": "../modules",
+      "destination": "/etc/puppetlabs/code/environments/production"
+    },
+    {
+      "type": "puppet-masterless",
+      "manifest_file": "../manifests/linux_manifest.pp",
+      "hiera_config_path": "./hieradata.conf",
+      "execute_command": "{{&puppet_masterless}}"
+    },
+    {
+      "type": "shell",
+      "execute_command": "{{&shell_command}}",
+      "scripts": [
+        "scripts/cleanup.sh"
+      ]
+    }
+  ],
+
+{{#post_proc}}
+  {{&line}}
+{{/post_proc}}
+}
