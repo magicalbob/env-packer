@@ -1,0 +1,44 @@
+{
+  "variables": {
+    "vm_name": "windows2016-virtualbox-{{timestamp}}",
+    "winrm_username": "{{env `WINRM_USERNAME`}}",
+    "winrm_password": "{{env `WINRM_PASSWORD`}}"
+  },
+
+  "builders": [{
+    "type":    "virtualbox-ovf",
+    "source_path": "ovf/box.ovf",
+    "headless":          true,
+    "vm_name":           "{{user `vm_name`}}",
+    "vboxmanage": [
+      [ "modifyvm", "{{.Name}}", "--memory", "2048" ],
+      [ "modifyvm", "{{.Name}}", "--cpus", "2" ]
+    ],	
+    "communicator":         "winrm",
+    "winrm_username":       "{{user `winrm_username`}}",
+    "winrm_password":       "{{user `winrm_password`}}",
+    "winrm_timeout":        "5h",
+    "shutdown_command":     "c:/windows/system32/sysprep/sysprep /oobe /unattend:a:/LoginUnattend.xml",
+    "shutdown_timeout":     "15m",
+    "floppy_files": [
+      "scripts/cleanup.sh"
+    ]
+
+  }],
+  "provisioners": [{
+    "type": "powershell",
+    "elevated_user": "{{user `username`}}",
+    "elevated_password": "{{user `password`}}",
+    "scripts": [
+      "./scripts/cleanup.cmd"
+    ]
+  }],
+    "post-processors": [
+    {
+      "type": "vagrant",
+      "keep_input_artifact": false,
+      "compression_level": 9,
+      "output": "windows2016-{{.Provider}}.box"
+    }
+  ]
+}
