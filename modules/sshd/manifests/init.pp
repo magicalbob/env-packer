@@ -47,7 +47,7 @@ class sshd {
     ensure => "installed"
   }
 
-  service { "ssh":
+  service { "sshd":
     ensure  => "running",
     enable  => "true",
     require => Package["openssh-server"]
@@ -57,9 +57,10 @@ class sshd {
     context => "/files/etc/ssh/sshd_config",
     changes => [
                  "set PasswordAuthentication no",
-                 "set UsePam yes"
+                 "set UsePam yes",
+                 "set PermitRootLogin no"
                ],
     require => Package["openssh-server"],
-    notify  => Service["ssh"]
+    notify  => Service["sshd"]
   }
 }
