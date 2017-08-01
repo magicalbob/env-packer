@@ -15,14 +15,19 @@ case ${MACHINE_SIZE,,} in
     ;;
 esac
 
+# Get rid of output folder if it is lying around
+rm -rvf output-vmware-iso
+
 # make the kickstart file based on machine size
 mustache ks/machine_${MACHINE_SIZE}.yml ks/ks.cfg.template > ks/ks.cfg
 
 # make the packer json file based on hypervisor
 mustache cloud-${CLOUD_TYPE}.yml packer-template.json.template > packer-template.json
 
+# Build the virtual machine image
 packer build packer-template.json
 
+# If artifactory username supplied, upload image to artifactory
 if [[ ${ARTIFACTORY_USERNAME} ]]
 then
   CHECKSUM=$(md5sum ${OS_TYPE}-${MACHINE_SIZE}-virtualbox.box | awk '{ print $1 }')
@@ -31,4 +36,13 @@ then
        -u${ARTIFACTORY_USERNAME}:${ARTIFACTORY_PASSWORD} \
        -T ${OS_TYPE}-${MACHINE_SIZE}-virtualbox.box \
        "https://dev.ellisbs.co.uk/artifactory/vagrant-local/${OS_TYPE}-${MACHINE_SIZE}.box;box_name=${OS_TYPE}-${MACHINE_SIZE};box_provider=virtualbox;box_version=${VERSION}"
+fi
+
+# If vcloud password supplied, and it is vmware image, upload image to vcloud
+if [[ ${VCLOUD_PASSWORD} ]]
+then
+  if [ ${CLOUD_TYPE} == "vmware" ]
+  then
+    sh scripts/upload.sh
+  fi
 fi
