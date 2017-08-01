@@ -63,11 +63,16 @@
     {
       "type": "file",
       "source": "../hieradata",
-      "destination": "/tmp/hieradata"
+      "destination": "/etc/puppetlabs/code/environments/production"
     },
     {
       "type": "file",
       "source": "../modules",
+      "destination": "/etc/puppetlabs/code/environments/production"
+    },
+    {
+      "type": "file",
+      "source": "../manifests",
       "destination": "/etc/puppetlabs/code/environments/production"
     },
     {
