@@ -11,7 +11,7 @@ vmx_data: [
           ]
 cloud_script:      "vagrant.sh"
 post_proc:         [ 
-                     { "line": '"post-processors": [{' },
+                     { "line": ',"post-processors": [{' },
                      { "line": '    "type": "vagrant",' },
                      { "line": '    "keep_input_artifact": false,' },
                      { "line": '    "output": "{{user `os_type`}}-{{user `machine_size`}}-{{.Provider}}.box" }]' }

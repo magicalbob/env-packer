@@ -83,7 +83,7 @@
         "scripts/cleanup.sh"
       ]
     }
-  ],
+  ]
 
 {{#post_proc}}
   {{&line}}

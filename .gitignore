@@ -4,3 +4,4 @@
 iso_installation/*.iso
 output-virtualbox-iso
 linux/ks/ks.cfg
+linux/packer-template.json
