@@ -5,3 +5,4 @@ iso_installation/*.iso
 linux/output-vmware-iso
 linux/ks/ks.cfg
 linux/packer-template.json
+hieradata/common.yaml
