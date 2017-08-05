@@ -13,7 +13,8 @@ hosts:
 
 boxes:
   'pipat-mobile-jenkins':
-     box: 'https://dev.ellisbs.co.uk/artifactory/vagrant-local/centos7-normal.box'
+     box: 'centos7'
+#     box: 'https://dev.ellisbs.co.uk/artifactory/vagrant-local/centos7-normal.box'
      os:  'linux'
   'pipatwin01':
      box: 'https://dev.ellisbs.co.uk/artifactory/vagrant-local/windows.box'
@@ -21,13 +22,20 @@ boxes:
 
 users:
   ian.ellis:
-    ensure: present
-    home:   /home/ian.ellis
-    shell:  /bin/bash
-    uid:    11000
-    gid:    11000
+    ensure:     present
+    managehome: true
+    home:       /home/ian.ellis
+    shell:      /bin/bash
+    uid:        11000
+    gid:        11000
     groups:
-            wheel
+                wheel
+
+ssh_keys:
+  ian.ellis:
+    user:   'ian.ellis'
+    type:   'ssh-rsa'
+    key:    'AAAAB3NzaC1yc2EAAAADAQABAAABAQDN3dk0lzioWuPp3Klcm/dexUF5a05S8Os2x7bjMA/yMsRUFALafl1TBWEwdsw412mDul7eeSwwNPvVyi30oZmXQeTqG7A/9EoIbmZjwBnaN+SSiTheHO5iA9WLHDBXSAKONNPH/DNvkvicmzry8wyUHYCiVym+IYv3+PDBx4HgkK9J/gHrIhzx+A40KBGFIqhYpy7HD5iMHVoSLrNSaSmPslqfnLA6DGWxuY7tyrcBTdIgxYGgFlEjvLG3sJS+D/wx6YsgTgzG7duWkw8QruCZSgPuSwNzApbnSmVKedu9ocKO443tDLuIVPKh2hHRFpImJeew3aB1BlaXg7WAgBRf'
 
 groups:
   ian.ellis:

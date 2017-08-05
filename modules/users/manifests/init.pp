@@ -45,6 +45,8 @@
 class users {
   $custom_groups = hiera('groups')
   $custom_users = hiera('users')
+  $custom_keys = hiera('ssh_keys')
   create_resources(group, $custom_groups)
   create_resources(user, $custom_users)
+  create_resources(ssh_authorized_key, $custom_keys)
 }
