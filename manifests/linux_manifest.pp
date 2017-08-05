@@ -2,6 +2,7 @@ node default {
   include ntp
   include hosts
   include sshd
+  include users
 
   yumrepo { 'lynis':
     baseurl => 'https://packages.cisofy.com/community/lynis/rpm/

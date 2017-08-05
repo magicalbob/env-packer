@@ -18,3 +18,18 @@ boxes:
   'pipatwin01':
      box: 'https://dev.ellisbs.co.uk/artifactory/vagrant-local/windows.box'
      os:  'windows'
+
+users:
+  ian.ellis:
+    ensure: present
+    home:   /home/ian.ellis
+    shell:  /bin/bash
+    uid:    11000
+    gid:    11000
+    groups:
+            wheel
+
+groups:
+  ian.ellis:
+    ensure: present
+    gid:    11000
