@@ -7,7 +7,7 @@ export SSH_USERNAME=root
 export SSH_PASSWORD=packer
 export MACHINE_SIZE=micro
 export CLOUD_TYPE=vagrant
-export BRANCH=lab
+export BRANCH=dev
 unset  ARTIFACTORY_USERNAME
 
 sh make-packer.sh | tee build.log
