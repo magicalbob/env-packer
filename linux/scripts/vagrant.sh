@@ -3,6 +3,7 @@
 set -x
 
 sudo useradd vagrant
+sudo usermod -a -G wheel vagrant
 sudo su -c "echo vagrant | passwd --stdin vagrant"
 sudo mkdir -p /vagrant
 sudo chown vagrant:vagrant /vagrant
