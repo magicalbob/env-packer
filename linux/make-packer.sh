@@ -36,7 +36,7 @@ mustache cloud-${CLOUD_TYPE}.yml packer-template.json.template > packer-template
 packer build packer-template.json
 
 # If artifactory username supplied, upload image to artifactory
-if [[ ${ARTIFACTORY_USERNAME} ]]
+if [[ ${ARTIFACTORY_PASSWORD} ]]
 then
   CHECKSUM=$(md5sum ${OS_TYPE}-${MACHINE_SIZE}-virtualbox.box | awk '{ print $1 }')
 
