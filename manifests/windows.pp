@@ -102,7 +102,7 @@ node default {
   }
 
   exec { 'puppet run once':
-    command => 'cmd.exe /c reg add HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce /v RunPuppet /t REG_SZ /d "c:\progra~1\puppet~1\puppet\bin\puppet.bat apply c:\vagrant\manifests\windows.pp"',
+    command => 'cmd.exe /c reg add HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce /v RunPuppet /t REG_SZ /d "c:\ProgramData\PuppetLabs\code\environments\production\manifests\site.pp"',
     path    => $::path,
     require => Exec['visualstudio Setup']
   }
