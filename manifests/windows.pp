@@ -2,7 +2,9 @@ node default {
 
   $custom_hosts = hiera('hosts',{})
   create_resources(host, $custom_hosts)
+}
 
+node 'pipatwin01' {
   package { 'git':
     ensure   => installed,
     provider => chocolatey
