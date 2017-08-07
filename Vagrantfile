@@ -26,6 +26,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |vagrant_config|
   common['boxes'].each do |box|
     vagrant_config.vm.define "#{box[0]}" do |srv|
       srv.vm.box = "#{box[1]['box']}"
+      srv.vm.hostname = "#{box[0]}"
   
       srv.vm.network "private_network", ip: "#{common['hosts'][box[0]]['ip']}"
 
