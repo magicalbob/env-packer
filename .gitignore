@@ -2,6 +2,8 @@
 *.box
 *.log
 iso_installation/*.iso
+linux/output-virtualbox-iso
 linux/output-vmware-iso
 linux/ks/ks.cfg
 linux/packer-template.json
+hieradata/common.yaml

@@ -3,6 +3,13 @@ node default {
   $custom_hosts = hiera('hosts',{})
   create_resources(host, $custom_hosts)
 
+  exec { 'puppet run once':
+    command => 'cmd.exe /c reg add HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce /v RunPuppet /t REG_SZ /d "c:\progra~1\puppet~1\puppet\bin\puppet.bat apply c:\ProgramData\PuppetLabs\code\environments\production\manifests\site.pp"',
+    path    => $::path
+  }
+}
+
+node 'pipatwin01' {
   package { 'git':
     ensure   => installed,
     provider => chocolatey
@@ -99,11 +106,5 @@ node default {
   package { 'windows-sdk-8.0':
     ensure   => installed,
     provider => chocolatey
-  }
-
-  exec { 'puppet run once':
-    command => 'cmd.exe /c reg add HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce /v RunPuppet /t REG_SZ /d "c:\progra~1\puppet~1\puppet\bin\puppet.bat apply c:\vagrant\manifests\windows.pp"',
-    path    => $::path,
-    require => Exec['visualstudio Setup']
   }
 }
