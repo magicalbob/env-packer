@@ -22,4 +22,10 @@ node default {
     unless  => "puppet module list | grep saz-sudo",
     path    => ['/bin', '/usr/bin', '/opt/puppetlabs/bin']
   }
+
+  exec { 'puppet-network':
+    command => "puppet module install puppet-network",
+    unless  => "puppet module list | grep puppet-network",
+    path    => ['/bin', '/usr/bin', '/opt/puppetlabs/bin']
+  }
 }
