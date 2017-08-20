@@ -2,12 +2,13 @@ node default {
   include ntp
   include hosts
   include users
+  include sshd
   include sudoers
   include firewall
   include lynis
 }
 
-node pipat-tform-api {
+node /^pipat-.*/ {
   network_config { 'eth0':
     ensure    => 'present',
     method    => 'static',
@@ -18,8 +19,9 @@ node pipat-tform-api {
 
   exec { 'network-restart':
     command => "systemctl restart network",
-    path    => ['/bin','/usr/bin','/opt/puppetlabs/bin']
+    path    => ['/bin','/usr/bin','/opt/puppetlabs/bin'],
+    onlyif    => [
+                   'which vmtoolsd'
+                 ]
   }
-
-  include sshd
 }
