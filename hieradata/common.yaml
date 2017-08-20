@@ -10,6 +10,8 @@ hosts:
      ip:  '10.0.0.10'
   'pipatwin01':
      ip:  '10.0.0.11'
+  'pipat-tform-api':
+     ip:  '10.21.1.120'
 
 boxes:
   'pipat-mobile-jenkins':
