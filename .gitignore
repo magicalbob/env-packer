@@ -7,3 +7,4 @@ linux/output-vmware-iso
 linux/ks/ks.cfg
 linux/packer-template.json
 linux/tmp.ovf
+windows/output-virtualbox-iso
