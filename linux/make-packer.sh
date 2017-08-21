@@ -18,14 +18,6 @@ esac
 # Get rid of output folder if it is lying around
 rm -rvf output-vmware-iso
 
-# Make sure that the hieradata is on right branch
-pushd ../hieradata
-if [ -d .git ]
-then
-  git checkout ${BRANCH}
-fi
-popd
-
 # make the kickstart file based on machine size
 mustache ks/machine_${MACHINE_SIZE}.yml ks/ks.cfg.template > ks/ks.cfg
 

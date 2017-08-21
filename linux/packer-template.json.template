@@ -58,26 +58,26 @@
     },
     {
       "type": "puppet-masterless",
-      "manifest_file": "../manifests/linux_modules.pp"
+      "manifest_file": "../../env-manifests/linux_modules.pp"
     },
     {
       "type": "file",
-      "source": "../hieradata",
+      "source": "../../env-hieradata",
       "destination": "/etc/puppetlabs/code/environments/production"
     },
     {
       "type": "file",
-      "source": "../modules",
+      "source": "../../env-modules",
       "destination": "/etc/puppetlabs/code/environments/production"
     },
     {
       "type": "file",
-      "source": "../manifests",
+      "source": "../../env-manifests",
       "destination": "/etc/puppetlabs/code/environments/production"
     },
     {
       "type": "puppet-masterless",
-      "manifest_file": "../manifests/linux_manifest.pp",
+      "manifest_file": "../../env-manifests/linux_manifest.pp",
       "hiera_config_path": "./hieradata.conf",
       "execute_command": "{{&puppet_masterless}}"
     },

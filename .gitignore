@@ -7,4 +7,3 @@ linux/output-vmware-iso
 linux/ks/ks.cfg
 linux/packer-template.json
 linux/tmp.ovf
-hieradata/common.yaml
