@@ -1,7 +1,7 @@
 vol_home:          512
-vol_tmp:           1024
-vol_var:           2048
+vol_tmp:           512
+vol_var:           3072
 vol_var_log:       512
 vol_var_log_audit: 256
 vol_root:          2048
-vol_opt:           1024
+vol_opt:           512
