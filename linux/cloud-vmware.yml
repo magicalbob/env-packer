@@ -1,5 +1,5 @@
 type:              "vmware-iso"
-guest_os_type:     "linux"
+guest_os_type:     "centos-64"
 vm_name:           "{{user `os_type`}}"
 vmdk_name:         [
                      { 'line': '    "vmdk_name":         "centos7",'}
