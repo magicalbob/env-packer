@@ -13,9 +13,9 @@ common=nil
 
 # Read YAML hieradata/common.yaml file to get hosts list
 begin
-  common = YAML.load_file('hieradata/common.yaml')
+  common = YAML.load_file('../hieradata/common.yaml')
 rescue
-  print "Cannot open hieradata/common.yaml\n"
+  print "Cannot open ../hieradata/common.yaml\n"
   exit 2
 end       
 
