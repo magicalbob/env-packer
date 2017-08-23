@@ -23,9 +23,5 @@ then
   new_host=\${new_host:1:-1}
   hostname \$new_host
   echo \$new_host > /etc/hostname
-
-  /opt/puppetlabs/bin/puppet apply /etc/puppetlabs/code/environments/production/manifests/linux_manifest.pp
 fi
 EOF'
-
-sudo chmod +x /etc/rc.local

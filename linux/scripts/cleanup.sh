@@ -45,3 +45,10 @@ sudo rm -vf /EMPTY
 
 # Clear history
 sudo sh -c ">/root/.bash_history"
+
+# Run puppet apply on start up
+sudo sh -c 'cat <<EOF >>/etc/rc.local
+
+/opt/puppetlabs/bin/puppet apply /etc/puppetlabs/code/environments/production/manifests/linux_manifest.pp
+EOF'
+sudo chmod +x /etc/rc.local
