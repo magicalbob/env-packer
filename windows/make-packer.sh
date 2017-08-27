@@ -2,6 +2,10 @@
 
 set -e
 
+rm -rvf manifests
+mkdir manifests
+cp -fvaRp ../../manifests/* manifests/
+
 packer build -force windows.json
 
 # If artifactory username supplied, upload image to artifactory
