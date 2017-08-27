@@ -16,7 +16,7 @@ case ${MACHINE_SIZE,,} in
 esac
 
 # Get rid of output folder if it is lying around
-rm -rvf output-vmware-iso
+rm -rvf output-vmware-iso output-virtualbox-iso
 
 # make the kickstart file based on machine size
 mustache ks/machine_${MACHINE_SIZE}.yml ks/ks.cfg.template > ks/ks.cfg
