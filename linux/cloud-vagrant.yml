@@ -1,6 +1,6 @@
 type:              "virtualbox-iso"
 guest_os_type:     "RedHat_64"
-vm_name:           "{{user `os_type`}}-{{.Provider}}-{{timestamp}}"
+vm_name:           "{{user `os_type`}}-{{timestamp}}"
 vmdk_name:         [
                    ]
 tools_upload_flavor: [
