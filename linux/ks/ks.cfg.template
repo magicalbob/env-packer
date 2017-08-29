@@ -42,14 +42,14 @@ clearpart --all --initlabel
 ## and so on. They'll have near the bag of bingo balls.
 ## part pv.6 --grow --size=1 --encrypt --passphrase=<an appropriate passphrase
 
-part /boot --fstype=ext4 --size=250
+part /boot --fstype=ext4 --size=250 --fsoptions="defaults,relatime,nodev,nosuid,noexec,discard"
 part pv.6 --grow --size=1 --label=vg00
 volgroup vg00 --pesize=65536 pv.6
 
 part swap --size 2047 --asprimary --ondisk sda  --label=swap
 
 # Layout the logical volumes as per the EAL 4 configs
-logvol /home           --fstype=ext4 --fsoptions="defaults,relatime,nodev,discard"               --name=home           --vgname=vg00     --size={{ vol_home }}
+logvol /home           --fstype=ext4 --fsoptions="defaults,relatime,nodev,nosuid,discard"        --name=home           --vgname=vg00     --size={{ vol_home }}
 logvol /tmp            --fstype=ext4 --fsoptions="defaults,relatime,nodev,nosuid,noexec,discard" --name=temp           --vgname=vg00     --size={{ vol_tmp }}
 logvol /var            --fstype=ext4 --fsoptions="defaults,relatime,discard"                     --name=var            --vgname=vg00     --size={{ vol_var }}
 logvol /var/log        --fstype=ext4 --fsoptions="defaults,relatime,nodev,nosuid,noexec,discard" --name=varlog         --vgname=vg00     --size={{ vol_var_log }}
