@@ -51,7 +51,6 @@
       "execute_command": "{{&shell_command}}",
       "scripts": [
         "scripts/{{ cloud_script }}",
-        "scripts/iptables.sh",
         "scripts/update.sh",
         "scripts/puppet.sh"
       ]
