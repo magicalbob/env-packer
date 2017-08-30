@@ -28,10 +28,12 @@ Packer Templates:
 	To build images of boxes:
 		Linux
 		Windows
+	Use mustache templating to handle different configs like template disk sizes.
 
 Configuration Manager:
 	To provision the images in the packer build & run
 	continuously to keep the instances as they should be.
+	Using puppet.
 		Manifests listing top level of each box
 		Modules to configure specific software (included by manifest)
 		Hieradata
@@ -59,6 +61,8 @@ Terraform Configuration:
 Building Images
 ===============
 
+To build linux image: cd linux; to build windows image: cd windows; then run make-packer.sh. The make-packer.sh takes a number of environment variables as inputs.
+
 Mac OS X only has version 3 of bash. Substitution of lower case variables only became available in bash version 4::
 
 	brew install bash
@@ -66,4 +70,3 @@ Mac OS X only has version 3 of bash. Substitution of lower case variables only b
 	sudo mv /bin/sh   /bin/sh.save
 	sudo ln -s /usr/local/Cellar/bash/4.3.46/bin/bash /bin/bash
 	sudo ln -s /bin/bash /bin/sh
-
