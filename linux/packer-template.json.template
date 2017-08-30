@@ -57,10 +57,6 @@
       ]
     },
     {
-      "type": "puppet-masterless",
-      "manifest_file": "../../manifests/linux_modules.pp"
-    },
-    {
       "type": "file",
       "source": "../../hieradata",
       "destination": "/etc/puppetlabs/code/environments/production"
@@ -74,6 +70,15 @@
       "type": "file",
       "source": "../../manifests",
       "destination": "/etc/puppetlabs/code/environments/production"
+    },
+    {
+      "type": "puppet-masterless",
+      "manifest_file": "../../manifests/linux_modules.pp"
+    },
+    {
+      "type": "puppet-masterless",
+      "manifest_file": "../../manifests/linux_facter.pp",
+      "execute_command": "{{&puppet_masterless}}"
     },
     {
       "type": "puppet-masterless",
