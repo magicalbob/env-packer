@@ -51,9 +51,9 @@ part swap --size 2047 --asprimary --ondisk sda  --label=swap
 # Layout the logical volumes as per the EAL 4 configs
 logvol /home           --fstype=ext4 --fsoptions="defaults,relatime,nodev,nosuid,discard"        --name=home           --vgname=vg00     --size={{ vol_home }}
 logvol /tmp            --fstype=ext4 --fsoptions="defaults,relatime,nodev,nosuid,noexec,discard" --name=temp           --vgname=vg00     --size={{ vol_tmp }}
-logvol /var            --fstype=ext4 --fsoptions="defaults,relatime,discard"                     --name=var            --vgname=vg00     --size={{ vol_var }}
+logvol /var            --fstype=ext4 --fsoptions="defaults,relatime,nosuid,discard"              --name=var            --vgname=vg00     --size={{ vol_var }}
 logvol /var/log        --fstype=ext4 --fsoptions="defaults,relatime,nodev,nosuid,noexec,discard" --name=varlog         --vgname=vg00     --size={{ vol_var_log }}
-logvol /var/log/audit  --fstype=ext4 --fsoptions="defaults,relatime,discard"                     --name=audit          --vgname=vg00     --size={{ vol_var_log_audit }}
+logvol /var/log/audit  --fstype=ext4 --fsoptions="defaults,relatime,nodev,nosuid,noexec,discard" --name=audit          --vgname=vg00     --size={{ vol_var_log_audit }}
 logvol /               --fstype=ext4 --fsoptions="defaults,relatime,discard"                     --name=root           --vgname=vg00     --size={{ vol_root }}
 logvol /opt            --fstype=ext4 --fsoptions="defaults,relatime,nodev,nosuid,discard" --name=optlog         --vgname=vg00     --size={{ vol_opt }}
 
