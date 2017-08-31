@@ -49,6 +49,10 @@ sudo sh -c ">/root/.bash_history"
 # Run puppet apply on start up
 sudo sh -c 'cat <<EOF >>/etc/rc.local
 
+# Turn on process accounting
+/sbin/accton on
+
+# Run puppet manifest (which will cron running puppet manifest at quarter past every hour)
 /opt/puppetlabs/bin/puppet apply /etc/puppetlabs/code/environments/production/manifests/linux_manifest.pp
 EOF'
 sudo chmod +x /etc/rc.local
