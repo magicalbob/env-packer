@@ -38,12 +38,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |vagrant_config|
         srv.winrm.transport = "plaintext"
       end
 
-      if box[1]['os'] == "linux"
-        srv.vm.provision "shell",
-          upload_path: "/var/tmp/do.rc.local.sh",
-          inline: "sudo su -c 'export FACTERLIB=/opt/puppetlabs/facter/facts.d/ && /etc/rc.local'"
-      end
-
       srv.vm.provider "virtualbox" do |vb|
         vb.memory = "2048"
       end
