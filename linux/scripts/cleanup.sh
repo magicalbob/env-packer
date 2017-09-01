@@ -32,6 +32,7 @@ sudo sh -c ">/var/log/wtmp"
 sudo sh -c ">/var/log/audit/audit.log"
 sudo sh -c ">/var/log/rhsm/rhsm.log"
 sudo sh -c ">/var/log/rhsm/rhsmcertd.log"
+sudo rm -rf /var/log/anaconda
 sudo rm -f /var/log/*.old
 sudo rm -f /var/log/*.log
 sudo rm -f /var/log/*.syslog
