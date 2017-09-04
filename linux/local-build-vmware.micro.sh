@@ -7,6 +7,12 @@ export SSH_USERNAME=root
 export SSH_PASSWORD=packer
 export MACHINE_SIZE=micro
 export CLOUD_TYPE=vmware
+export VCLOUD_USER=7535.89.488a95
+export VCLOUD_ORG=66-89-1-13874f
+export VCLOUD_VAPP=centos7
+export VCLOUD_CATALOG=PIPAT
+export VCLOUD_NET=PIPAT-DEV-ROUTED
+export VCLOUD_PASSWORD='qgioh(4gPou3t)'
 unset  ARTIFACTORY_USERNAME
 
-sh make-packer.sh | tee build.log
+sh make-packer.sh | tee buildi.vmware.micro.log
