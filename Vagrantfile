@@ -28,7 +28,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |vagrant_config|
       srv.vm.box = "#{box[1]['box']}"
       srv.vm.hostname = "#{box[0]}"
   
-      srv.vm.network "private_network", ip: "#{common['hosts'][box[0]]['ip']}"
+      srv.vm.network "public_network", ip: "#{common['hosts'][box[0]]['ip']}"
 
       if box[1]['os'] == "windows"
         srv.vm.communicator = "winrm"
