@@ -9,3 +9,4 @@ linux/packer-template.json
 linux/tmp.ovf
 windows/output-virtualbox-iso
 windows/manifests
+config.yaml

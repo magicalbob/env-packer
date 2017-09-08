@@ -11,6 +11,13 @@ require 'yaml'
 
 common=nil
 
+# Read YAML config for Vagrantfile, if present
+begin
+  config = YAML.load_file('config.yaml')
+rescue
+  config = {}
+end
+
 # Read YAML hieradata/common.yaml file to get hosts list
 begin
   common = YAML.load_file('../hieradata/common.yaml')
@@ -28,7 +35,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |vagrant_config|
       srv.vm.box = "#{box[1]['box']}"
       srv.vm.hostname = "#{box[0]}"
   
-      srv.vm.network "public_network", ip: "#{common['hosts'][box[0]]['ip']}"
+      srv.vm.network "public_network", ip: "#{common['hosts'][box[0]]['ip']}", bridge: "#{config['bridge']}"
 
       if box[1]['os'] == "windows"
         srv.vm.communicator = "winrm"
