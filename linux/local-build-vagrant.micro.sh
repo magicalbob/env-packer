@@ -9,4 +9,4 @@ export MACHINE_SIZE=micro
 export CLOUD_TYPE=vagrant
 unset  ARTIFACTORY_USERNAME
 
-sh make-packer.sh | tee build.log
+sh make-packer.sh | tee log/build.vagrant.micro.log

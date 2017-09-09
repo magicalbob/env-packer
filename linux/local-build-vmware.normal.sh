@@ -9,4 +9,4 @@ export MACHINE_SIZE=normal
 export CLOUD_TYPE=vmware
 unset  ARTIFACTORY_USERNAME
 
-sh make-packer.sh | tee build.log
+sh make-packer.sh | tee log/build.normal.log
