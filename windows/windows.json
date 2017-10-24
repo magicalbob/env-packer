@@ -11,7 +11,7 @@
     "type":    "virtualbox-iso",
     "headless":          true,
     "vm_name":           "{{user `vm_name`}}",
-    "disk_size":         "30720",
+    "disk_size":         "51200",
     "vboxmanage": [
       [ "modifyvm", "{{.Name}}", "--natpf1", "winrm,tcp,,55985,,5985" ],
       [ "modifyvm", "{{.Name}}", "--memory", "2048" ],
