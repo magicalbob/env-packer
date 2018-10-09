@@ -52,8 +52,7 @@
       "scripts": [
         "scripts/{{ cloud_script }}",
         "scripts/update.sh",
-        "scripts/puppet.sh",
-        "scripts/puppet-secrets.sh"
+        "scripts/puppet.sh"
       ]
     },
     {
