@@ -72,10 +72,6 @@
     },
     {
       "type": "puppet-masterless",
-      "manifest_file": "../../manifests/linux_modules.pp"
-    },
-    {
-      "type": "puppet-masterless",
       "manifest_file": "../../manifests/linux_manifest.pp",
       "hiera_config_path": "./hieradata.conf",
       "execute_command": "{{&puppet_masterless}}"
