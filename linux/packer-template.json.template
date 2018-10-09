@@ -57,11 +57,6 @@
     },
     {
       "type": "file",
-      "source": "../keys",
-      "destination": "/etc/puppetlabs/puppet/keys"
-    },
-    {
-      "type": "file",
       "source": "../../hieradata",
       "destination": "/etc/puppetlabs/code/environments/production"
     },
