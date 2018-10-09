@@ -52,8 +52,14 @@
       "scripts": [
         "scripts/{{ cloud_script }}",
         "scripts/update.sh",
-        "scripts/puppet.sh"
+        "scripts/puppet.sh",
+        "scripts/puppet-secrets.sh"
       ]
+    },
+    {
+      "type": "file",
+      "source": "../keys",
+      "destination": "/etc/puppetlabs/puppet/keys"
     },
     {
       "type": "file",
@@ -73,11 +79,6 @@
     {
       "type": "puppet-masterless",
       "manifest_file": "../../manifests/linux_modules.pp"
-    },
-    {
-      "type": "puppet-masterless",
-      "manifest_file": "../../manifests/linux_facter.pp",
-      "execute_command": "{{&puppet_masterless}}"
     },
     {
       "type": "puppet-masterless",
